@@ -45,7 +45,11 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "letter_opener_web"
-  gem "rspec-rails"
+  gem "rspec-rails", ">= 2.8.0"
+  gem "rails-controller-testing"
+  gem "factory_bot_rails"
+  gem "factory_bot"
+  gem "faker"
   gem "rspec"
 end
 
@@ -65,7 +69,6 @@ group :development do
   gem "binding_of_caller"
   gem "rack-mini-profiler"
   gem "bullet"
-
 end
 
 group :test do
