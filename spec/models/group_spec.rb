@@ -14,11 +14,6 @@ RSpec.describe Group, type: :model do
         params.merge!(name: "a" * 21)
         expect(group.errors[:name].size).to eq 1
       end
-      it "インジェクション" do
-        params.merge!(name: "<a href='test.com'></a>")
-        group
-        debugger
-      end
     end
   end
 end
