@@ -45,6 +45,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "letter_opener_web"
+  gem "rspec-rails"
+  gem "rspec"
 end
 
 group :development do
@@ -57,13 +59,13 @@ group :development do
 
   # エラー画面をわかりやすく整形してくれる
   gem "better_errors"
+  gem "meta_request"
 
   # better_errorsの画面上にirb/pry(PERL)を表示する
   gem "binding_of_caller"
-
   gem "rack-mini-profiler"
-
   gem "bullet"
+
 end
 
 group :test do
