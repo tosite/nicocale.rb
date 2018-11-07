@@ -1,0 +1,27 @@
+p#notice
+  = notice
+h1
+  | Groups
+table
+  thead
+    tr
+      th
+        | Name
+      th[colspan="3"]
+  tbody
+    - @groups.each do |group|
+      tr
+        td
+          = group.name
+        td
+          = image_tag group.avatar
+        td
+          = link_to 'Show', group
+        td
+          = link_to 'Edit', edit_group_path(group)
+        td
+          = link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Group', new_group_path
+p
+  = link_to "ログアウト", destroy_user_session_path, method: :delete
