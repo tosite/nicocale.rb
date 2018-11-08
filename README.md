@@ -5,6 +5,10 @@ application up and running.
 
 Things you may want to cover:
 
+## デバッグ用
+- http://localhost:3000/letter_opener
+- http://localhost:3000/rails/info/routes
+
 * Ruby version
 
 * System dependencies
