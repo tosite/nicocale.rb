@@ -6,9 +6,9 @@
       | Forgot your password?
     .card-text
       = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-        .form-group
+        .form-team
           = f.label :email, class: "bmd-label-floating"
           = f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email"
-        .form-group
+        .form-team
           = f.submit "Send me reset password instructions", class: "btn btn-primary btn-raised btn-block btn-lg"
       = render "devise/shared/links"
