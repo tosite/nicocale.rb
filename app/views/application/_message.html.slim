@@ -1,0 +1,11 @@
+- unless alert.nil?
+  .alert.alert-warning.alert-dismissible.fade.show role="alert"
+    button.close type="button" data-dismiss="alert" aria-label="close"
+      span aria-hidden="true" &times
+    = alert
+
+- unless notice.nil?
+  .alert.alert-info.alert-dismissible.fade.show role="alert"
+    button.close type="button" data-dismiss="alert" aria-label="close"
+      span aria-hidden="true" &times
+    = notice

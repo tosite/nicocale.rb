@@ -1,24 +1,23 @@
-h2
-  | Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      em
-        | (
-        = @minimum_password_length
-        |  characters minimum)
-    br
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+/ .alert.alert-warning.alert-dismissible.fade.show role="alert"
+/   button.close type="button" data-dismiss="alert" aria-label="close"
+/     span aria-hidden="true" &times
+/   = devise_error_messages!
+
+.card
+  .card-body
+    h2.card-title
+      | Sign up
+    .card-text
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        .form-group
+          = f.label :email, class: "bmd-label-floating"
+          = f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", required: true
+        .form-group
+          = f.label :password, class: "bmd-label-floating"
+          = f.password_field :password, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
+        .form-group
+          = f.label :password_confirmation, class: "bmd-label-floating"
+          = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
+        .actions
+          = f.submit "Sign up", class: "btn btn-primary btn-raised btn-block btn-lg"
+      = render "devise/shared/links"

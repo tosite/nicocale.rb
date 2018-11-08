@@ -8,9 +8,9 @@
         - group.errors.full_messages.each do |message|
           li
             = message
-  .field
-    = form.label :name
-    = form.text_field :name
+  fieldset.form-group
+    = form.label.bmd-label-floating :name
+    = form.text_field.form-control :name
   .field
     = form.label :avatar
     = form.file_field :avatar
