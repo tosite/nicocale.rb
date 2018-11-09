@@ -1,6 +1,3 @@
-p#notice = notice
-
-
-/ => link_to 'Edit', edit_team_path(@team)
-/ '|
-/ =< link_to 'Back', teams_path
+.card
+  .card-body
+    = render "teams/user_emotions/form", user_emotion: @user_emotion, team_user: @team_user

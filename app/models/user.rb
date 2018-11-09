@@ -7,4 +7,5 @@ class User < ApplicationRecord
            :recoverable, :rememberable, :validatable,
            :confirmable, :trackable
   has_many :team_users, dependent: :destroy
+  has_many :user_emotions, dependent: :destroy
 end

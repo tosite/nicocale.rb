@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team,      only: [:show, :update, :destroy]
+  # before_action :set_team_user, only: [:show]
 
   # GET /teams
   # GET /teams.json
@@ -12,6 +13,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @user_emotion = current_user.user_emotions.new
   end
 
   # GET /teams/new
@@ -74,6 +76,10 @@ class TeamsController < ApplicationController
     def set_team
       @team = Team.find(params[:id])
     end
+
+    # def set_team_user
+    #   @team_user = current_user.team_users.find_by(team_id: params[:id])
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params

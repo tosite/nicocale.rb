@@ -19,4 +19,4 @@ class UserEmotion < ApplicationRecord
     def exist_user_id
       errors.add(:user_id, "tuser_idが存在しません。") if User.all.ids.exclude?(user_id)
     end
-  end
+end

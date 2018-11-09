@@ -2,6 +2,7 @@
 
 class UserEmotionsController < ApplicationController
   before_action :set_user_emotion, only: [:show, :edit, :update, :destroy]
+  before_action :set_team_user# ,    only: [:create]
 
   # GET /user_emotions
   # GET /user_emotions.json
@@ -27,13 +28,14 @@ class UserEmotionsController < ApplicationController
   # POST /user_emotions.json
   def create
     @user_emotion = UserEmotion.new(user_emotion_params)
-
     respond_to do |format|
       if @user_emotion.save
-        format.html { redirect_to @user_emotion, notice: "User emotion was successfully created." }
+        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
+        # format.html { redirect_to @user_emotion, notice: "User emotion was successfully created." }
         format.json { render :show, status: :created, location: @user_emotion }
       else
-        format.html { render :new }
+        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
+        # format.html { render :new }
         format.json { render json: @user_emotion.errors, status: :unprocessable_entity }
       end
     end
@@ -69,8 +71,14 @@ class UserEmotionsController < ApplicationController
       @user_emotion = UserEmotion.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def user_emotion_params
-      params.require(:user_emotion).permit(:emotion_id, :team_user_id, :user_id, :team_id, :comment)
+      p = params.require(:user_emotion).permit(:emotion_id, :description, :reported_on, :team_user_id)
+      p[:user_id] = @team_user.user_id
+      p[:team_id] = @team_user.team_id
+      p
+    end
+
+    def set_team_user
+      @team_user = current_user.team_users.find_by(team_id: params[:team_id])
     end
 end
