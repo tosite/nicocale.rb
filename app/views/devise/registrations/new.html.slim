@@ -9,13 +9,13 @@
       | Sign up
     .card-text
       = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-        .form-team
+        .form-group
           = f.label :email, class: "bmd-label-floating"
           = f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", required: true
-        .form-team
+        .form-group
           = f.label :password, class: "bmd-label-floating"
           = f.password_field :password, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
-        .form-team
+        .form-group
           = f.label :password_confirmation, class: "bmd-label-floating"
           = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
         .actions

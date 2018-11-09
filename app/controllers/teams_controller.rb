@@ -20,8 +20,9 @@ class TeamsController < ApplicationController
   end
 
   # GET /teams/1/edit
-  def edit
-  end
+  # def edit
+  #   # @new_team = Team.new
+  # end
 
   # POST /teams
   # POST /teams.json
@@ -30,11 +31,15 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to @team, notice: "Team was successfully created." }
-        format.json { render :show, status: :created, location: @team }
+        @team.team_users.create(user_id: current_user.id)
+        format.html { redurect_to redirect_back(fallback_location: root_path), notice: "Team was successfully created." }
+        # format.html { redirect_to @team, notice: "Team was successfully created." }
+        # format.json { render :show, status: :created, location: @team }
       else
-        format.html { render :new }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.html { redurect_to redirect_back(fallback_location: root_path), notice: "Team was successfully created." }
+        # format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully created.") }
+        # format.html { render :new }
+        # format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,10 +49,12 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to @team, notice: "Team was successfully updated." }
+        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
+        # format.html { redirect_to @team, notice: "Team was successfully updated." }
         format.json { render :show, status: :ok, location: @team }
       else
-        format.html { render :edit }
+        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
+        # format.html { render :edit }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
@@ -71,6 +78,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.fetch(:team, {})
+      params.require(:team).permit(:name, :description, :avatar)
     end
 end

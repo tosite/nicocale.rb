@@ -1,9 +1,25 @@
-= form_for @team do |f|
-  - if @team.errors.any?
+= form_with(model: team, local: true) do |form|
+  - if team.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@team.errors.count, "error")} prohibited this team from being saved:"
+      h2
+        = pluralize(team.errors.count, "error")
+        |  prohibited this team from being saved:
       ul
-        - @team.errors.full_messages.each do |message|
-          li = message
+        - team.errors.full_messages.each do |message|
+          li
+            = message
+  .form-group
+    = form.label :name, class: "bmd-label-floating"
+    = form.text_field :name, class: "form-control"
 
-  .actions = f.submit
+  .form-group
+    = form.label :description, class: "bmd-label-floating"
+    = form.text_field :description, class: "form-control"
+    
+  .input-group.mb-3
+    .custom-file
+      = form.file_field :avatar, class: "custom-file-input"
+      label.custom-file-label for="team_avatar" Choose file
+
+  .actions
+    = form.submit "更新する", class: "btn btn-primary btn-raised btn-block btn-lg"

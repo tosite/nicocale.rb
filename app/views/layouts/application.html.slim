@@ -9,19 +9,46 @@ html.is-application lang="ja"
     title nicocale
     = csrf_meta_tags
     / = render "favicons"
-    style main { min-height: 100vh; }
-  body
-    .bmd-layout-container.bmd-drawer-f-l.bmd-drawer-overlay
-      = render "nav"
-      main.bmd-layout-content
-        div style="margin-bottom: 10px;"
+    sass:
+      main
+        min-height: calc(100vh - 56px)
+      .avatar
+        object-fit: cover
+        background-color: #ccc
+      .avatar-xs
+        width: 32px
+        height: 32px
+      .avatar-sm
+        width: 48px
+        height: 48px
+      .avatar-md
+        width: 64px
+        height: 64px
+      .avatar-lg
+        width: 128px
+        height: 128px
+      .modal-backdrop
+        display: none
+      .bmd-layout-header
+        z-index: 0
+      .modal
+        background: rgba(0, 0, 0, 0.4)
+      .pa-0
+        padding: 0
+
+  body style="position: relative;"
+    .bmd-layout-container.bmd-drawer-f-l.bmd-drawer-overlay style="position: relative;"
+      = render "navbar/nav"
+      main.bmd-layout-content style="position: relative;"
+        .mb-4
         .container
           = render "message"
           = yield
 
-    script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"
-    script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"
-    script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"
-    script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"
-    javascript:
-      $(document).ready(function() { $('body').bootstrapMaterialDesign() })
+script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"
+script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"
+script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"
+script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"
+javascript:
+  $(document).ready(function() { $('body').bootstrapMaterialDesign() })
+

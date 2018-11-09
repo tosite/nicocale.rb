@@ -1,0 +1,27 @@
+header.bmd-layout-header
+  .navbar.navbar-expand-lg.navbar-light.bg-light
+    button.navbar-toggler data-target="#sidebar" data-toggle="drawer" type="button" style="display: inline-block;"
+      i.material-icons menu
+    a.navbar-brand.ml-2 href="/" NicoCale!
+    button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button" 
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse.text-right
+      / ul.navbar-nav.mr-auto
+      ul.nav.nav-pills
+        - if user_signed_in?
+          li.nav-item
+            = link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link"
+        - else
+          li.nav-item
+            = link_to "Signup", new_user_registration_path, class: "nav-link"
+
+- if user_signed_in?
+  = render "navbar/sign_in_side"
+  = render "teams/team_modals"
+- else
+  = render "navbar/not_sign_in_side"
+  / ul.list-group
+  /   a.list-group-item
+  /     img.img-thumbnail.rounded-circle src="https://pbs.twimg.com/profile_images/973333970657067009/nLexGc0s_400x400.jpg"
+  /   a.list-group-item Link 2
+  /   a.list-group-item Link 3

@@ -1,0 +1,16 @@
+/ .card
+/   .card-header
+/     .media
+/       = image_tag team.avatar, class: "rounded-circle"
+/       .media-body
+/         h4.media-heading = team.name
+/   .card-text
+
+.card
+  .card-body
+    .card-text
+      .media
+        = image_tag team.avatar, class: "align-self-center rounded-circle mr-3 avatar avatar-md"
+        .media-body
+          h4.mt-0 = team.name
+          p.mb-0  = team.description

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class TeamUser < ApplicationRecord
-  has_one :team
-  has_one :user
+  belongs_to :team
+  belongs_to :user
   validate :exist_team_id
   validate :exist_user_id
 
