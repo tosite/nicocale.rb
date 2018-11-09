@@ -3,8 +3,9 @@
 class TeamUser < ApplicationRecord
   belongs_to :team
   belongs_to :user
-  validate :exist_team_id
-  validate :exist_user_id
+  has_many   :user_emotions
+  validate   :exist_team_id
+  validate   :exist_user_id
 
   private
     def exist_team_id

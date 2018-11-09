@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_083744) do
+ActiveRecord::Schema.define(version: 2018_11_09_143745) do
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,6 +44,17 @@ ActiveRecord::Schema.define(version: 2018_11_08_083744) do
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_emotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "emotion_id"
+    t.integer "team_user_id"
+    t.integer "user_id"
+    t.integer "team_id"
+    t.text "description"
+    t.date "reported_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,24 @@
+= form_for @user_emotion do |f|
+  - if @user_emotion.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user_emotion.errors.count, "error")} prohibited this user_emotion from being saved:"
+      ul
+        - @user_emotion.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :emotion_id
+    = f.number_field :emotion_id
+  .field
+    = f.label :team_user_id
+    = f.number_field :team_user_id
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :team_id
+    = f.number_field :team_id
+  .field
+    = f.label :comment
+    = f.text_area :comment
+  .actions = f.submit

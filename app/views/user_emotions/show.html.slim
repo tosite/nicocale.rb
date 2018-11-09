@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Emotion:
+  = @user_emotion.emotion_id
+p
+  strong Team user:
+  = @user_emotion.team_user_id
+p
+  strong User:
+  = @user_emotion.user_id
+p
+  strong Team:
+  = @user_emotion.team_id
+p
+  strong Comment:
+  = @user_emotion.comment
+
+=> link_to 'Edit', edit_user_emotion_path(@user_emotion)
+'|
+=< link_to 'Back', user_emotions_path

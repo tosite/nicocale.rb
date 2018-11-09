@@ -1,0 +1,29 @@
+h1 Listing user_emotions
+
+table
+  thead
+    tr
+      th Emotion
+      th Team user
+      th User
+      th Team
+      th Comment
+      th
+      th
+      th
+
+  tbody
+    - @user_emotions.each do |user_emotion|
+      tr
+        td = user_emotion.emotion_id
+        td = user_emotion.team_user_id
+        td = user_emotion.user_id
+        td = user_emotion.team_id
+        td = user_emotion.comment
+        td = link_to 'Show', user_emotion
+        td = link_to 'Edit', edit_user_emotion_path(user_emotion)
+        td = link_to 'Destroy', user_emotion, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New User emotion', new_user_emotion_path
