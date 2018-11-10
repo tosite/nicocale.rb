@@ -6,4 +6,8 @@ class Team < ApplicationRecord
     presence: true,
     length: { maximum: 20 }
   has_many :team_users, dependent: :destroy
+
+  def team_user(user_id:)
+    self.team_users.where(user_id: user_id)
+  end
 end

@@ -13,7 +13,10 @@ Rails.application.routes.draw do
 
   resources :teams, only: %i(index new show create update destroy) do
     resources :user_emotions
-    resources :calendars, only: %i(show)
+    namespace :tests do
+      resources :calendar, only: %i(show)
+      resources :list,     only: %i(show)
+    end
   end
 
   # resources :team_users do

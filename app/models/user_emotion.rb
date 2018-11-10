@@ -9,6 +9,10 @@ class UserEmotion < ApplicationRecord
   validate   :exist_user_id
   validates  :reported_on, presence: true
   validates  :description, length: { maximum: 200 }
+
+  scope :reported_on_between, -> (month) { where(reported_on: month..month.end_of_month).all }
+  scope :team_id,             -> (team_id) { where(team_id: team_id) }
+
   private
     def exist_team_user_id
       errors.add(:team_user_id, "team_user_idが存在しません。") if TeamUser.all.ids.exclude?(team_user_id)

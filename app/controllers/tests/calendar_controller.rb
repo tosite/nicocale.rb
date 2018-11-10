@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CalendarsController < ApplicationController
+class Tests::CalendarController < ApplicationController
   # # GET /teams
   # # GET /teams.json
   # def index

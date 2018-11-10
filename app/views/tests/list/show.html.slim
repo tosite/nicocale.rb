@@ -1,0 +1,46 @@
+h2 = @month.strftime("%Y年%m月")
+
+div style="overflow: auto;"
+  table.table.table-hover
+    tr
+      th ユーザー名
+      - (@month..@month.end_of_month).each do |day|
+        th = day.strftime("%d")
+    - @team_users.each do |u|
+      tr
+        th = u.user.email
+        - (@month..@month.end_of_month).each do |day|
+          td
+            = render "tests/list/td", date: day, emotion: @user_emotions.where(reported_on: day).where(team_user_id: u.id).first
+
+/ - @user_emotions.each do |e|
+/   p = e.id
+
+
+- (@month..@month.end_of_month).each do |day|
+  .modal.fade id="emotion-modal-new-#{day.strftime('%Y%m%d')}" aria-hidden="true" aria-labelledby="emotion-modal-new-#{day.strftime('%Y%m%d')}" role="dialog" tabindex="-1" 
+    .modal-dialog role="document" 
+      .modal-content
+        .modal-header
+          h5#emotion-new-modal.modal-title Modal title
+          button.close aria-label="Close" data-dismiss="modal" type="button" 
+            span aria-hidden="true"  &times;
+        .modal-body
+          = render "teams/user_emotions/form", user_emotion: @user_emotion, team: @team, date: day
+        .modal-footer
+          button.btn.btn-secondary data-dismiss="modal" type="button"  Close
+          button.btn.btn-primary type="button"  Save changes
+
+- @user_emotions.each do |e|
+  .modal.fade id="emotion-modal-#{e.id}" aria-hidden="true" aria-labelledby="emotion-modal-#{e.id}" role="dialog" tabindex="-1" 
+    .modal-dialog role="document" 
+      .modal-content
+        .modal-header
+          h5#emotion-new-modal.modal-title Modal title
+          button.close aria-label="Close" data-dismiss="modal" type="button" 
+            span aria-hidden="true"  &times;
+        .modal-body
+          = render "teams/user_emotions/form", user_emotion: e, team: @team, date: e.reported_on
+        .modal-footer
+          button.btn.btn-secondary data-dismiss="modal" type="button"  Close
+          button.btn.btn-primary type="button"  Save changes

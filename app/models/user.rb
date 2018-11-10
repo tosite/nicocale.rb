@@ -8,4 +8,8 @@ class User < ApplicationRecord
            :confirmable, :trackable
   has_many :team_users, dependent: :destroy
   has_many :user_emotions, dependent: :destroy
+
+  def team_user(team_id)
+    self.team_users.find_by(team_id: team_id)
+  end
 end

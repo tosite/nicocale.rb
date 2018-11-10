@@ -1,0 +1,20 @@
+p test
+- today = Date.today
+table
+  caption= today.strftime('%Y年%m月')
+  tr
+    th 月
+    th 火
+    th 水
+    th 木
+    th 金
+    th 土
+    th 日
+  tr
+    - month = today.strftime('%m')
+    - d = today.at_beginning_of_month.at_beginning_of_week
+    - 1.upto(5).each do|i|
+      tr
+        - (d..d.end_of_week).each do|c|
+          th= (c.strftime('%m') == month)? c.strftime('%d'): "  "
+      - d = d + 1.week

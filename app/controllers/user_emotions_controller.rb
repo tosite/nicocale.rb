@@ -27,7 +27,7 @@ class UserEmotionsController < ApplicationController
   # POST /user_emotions
   # POST /user_emotions.json
   def create
-    @user_emotion = UserEmotion.new(user_emotion_params)
+    @user_emotion = current_user.team_user(params[:team_id]).user_emotions.new(user_emotion_params)
     respond_to do |format|
       if @user_emotion.save
         format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
@@ -46,10 +46,12 @@ class UserEmotionsController < ApplicationController
   def update
     respond_to do |format|
       if @user_emotion.update(user_emotion_params)
-        format.html { redirect_to @user_emotion, notice: "User emotion was successfully updated." }
+        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
+        # format.html { redirect_to @user_emotion, notice: "User emotion was successfully updated." }
         format.json { render :show, status: :ok, location: @user_emotion }
       else
-        format.html { render :edit }
+        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
+        # format.html { render :edit }
         format.json { render json: @user_emotion.errors, status: :unprocessable_entity }
       end
     end
@@ -68,7 +70,7 @@ class UserEmotionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_emotion
-      @user_emotion = UserEmotion.find(params[:id])
+      @user_emotion = current_user.user_emotions.find(params[:id])
     end
 
     def user_emotion_params

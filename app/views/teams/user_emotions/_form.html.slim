@@ -1,4 +1,4 @@
-= form_for [@team, @user_emotion] do |f|
+= form_for [team, user_emotion] do |f|
   - if @user_emotion.errors.any?
     #error_explanation
       h2 = "#{pluralize(@user_emotion.errors.count, "error")} prohibited this user_emotion from being saved:"
@@ -23,7 +23,7 @@
     = f.label :description, class: "bmd-label-floating"
     = f.text_area :description, class: "form-control"
 
-    = f.text_field :reported_on,  value: "#{Date.current}"
+    = f.text_field :reported_on,  value: "#{date}"
 
   .actions
     = f.submit "更新する", class: "btn btn-primary btn-raised btn-block btn-lg"
