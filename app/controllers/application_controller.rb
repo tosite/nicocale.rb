@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     if notice.length > 0
       return redirect_back(fallback_location: route, notice: notice)
     end
-    if alerts.length > 0
+    if alerts.count > 0
       return redirect_back(fallback_location: route, alert: alerts.full_messages)
     end
   end

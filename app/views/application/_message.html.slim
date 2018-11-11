@@ -2,9 +2,11 @@
   .alert.alert-warning.alert-dismissible.fade.show role="alert"
     button.close type="button" data-dismiss="alert" aria-label="close"
       span aria-hidden="true" &times
-    ul
-      - alert.each do |message|
-        li = message
+    h5
+      i.material-icons error
+      | データが更新できませんでした
+    - alert.each do |message|
+      p.mb-0.ml-3 = message
 
 / - unless alert.nil?
 /   #error_explanation
@@ -17,4 +19,4 @@
   .alert.alert-info.alert-dismissible.fade.show role="alert"
     button.close type="button" data-dismiss="alert" aria-label="close"
       span aria-hidden="true" &times
-    = notice
+    p.mb-0.ml-3 = notice
