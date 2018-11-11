@@ -33,14 +33,12 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        @team.team_users.create(user_id: current_user.id)
-        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
-        # format.html { redirect_to @team, notice: "Team was successfully created." }
-        # format.json { render :show, status: :created, location: @team }
+        @team.team_users.create!(user_id: current_user.id)
+        format.html { redirect_back_page(notice: "success!") }
+        format.json { render :show, status: :created, location: @team }
       else
-        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
-        # format.html { render :new }
-        # format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.html { redirect_back_page(alerts: @team.errors) }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -50,12 +48,10 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
-        # format.html { redirect_to @team, notice: "Team was successfully updated." }
+        format.html { redirect_back_page(notice: "success!") }
         format.json { render :show, status: :ok, location: @team }
       else
-        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
-        # format.html { render :edit }
+        format.html { redirect_back_page(alerts: @team.errors) }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
@@ -66,7 +62,7 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: "Team was successfully destroyed." }
+      format.html { redirect_back_page(notice: "success!") }
       format.json { head :no_content }
     end
   end

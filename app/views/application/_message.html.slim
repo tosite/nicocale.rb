@@ -2,7 +2,16 @@
   .alert.alert-warning.alert-dismissible.fade.show role="alert"
     button.close type="button" data-dismiss="alert" aria-label="close"
       span aria-hidden="true" &times
-    = alert
+    ul
+      - alert.each do |message|
+        li = message
+
+/ - unless alert.nil?
+/   #error_explanation
+/     h2 = "#{pluralize(alert.count, "error")} prohibited this user_emotion from being saved:"
+/     ul
+/       - alert.each do |message|
+/         li = message
 
 - unless notice.nil?
   .alert.alert-info.alert-dismissible.fade.show role="alert"

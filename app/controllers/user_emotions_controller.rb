@@ -1,28 +1,8 @@
 # frozen_string_literal: true
 
 class UserEmotionsController < ApplicationController
-  before_action :set_user_emotion, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_emotion, only: [:update, :destroy]
   before_action :set_team_user# ,    only: [:create]
-
-  # GET /user_emotions
-  # GET /user_emotions.json
-  def index
-    @user_emotions = UserEmotion.all
-  end
-
-  # GET /user_emotions/1
-  # GET /user_emotions/1.json
-  def show
-  end
-
-  # GET /user_emotions/new
-  def new
-    @user_emotion = UserEmotion.new
-  end
-
-  # GET /user_emotions/1/edit
-  def edit
-  end
 
   # POST /user_emotions
   # POST /user_emotions.json
@@ -30,12 +10,10 @@ class UserEmotionsController < ApplicationController
     @user_emotion = current_user.team_user(params[:team_id]).user_emotions.new(user_emotion_params)
     respond_to do |format|
       if @user_emotion.save
-        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
-        # format.html { redirect_to @user_emotion, notice: "User emotion was successfully created." }
+        format.html { redirect_back_page(notice: "success!") }
         format.json { render :show, status: :created, location: @user_emotion }
       else
-        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
-        # format.html { render :new }
+        format.html { redirect_back_page(alerts: @user_emotion.errors) }
         format.json { render json: @user_emotion.errors, status: :unprocessable_entity }
       end
     end
@@ -46,12 +24,10 @@ class UserEmotionsController < ApplicationController
   def update
     respond_to do |format|
       if @user_emotion.update(user_emotion_params)
-        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
-        # format.html { redirect_to @user_emotion, notice: "User emotion was successfully updated." }
+        format.html { redirect_back_page(notice: "success!") }
         format.json { render :show, status: :ok, location: @user_emotion }
       else
-        format.html { redirect_back(fallback_location: root_path, notice: "Team was successfully updated.") }
-        # format.html { render :edit }
+        format.html { redirect_back_page(alerts: @user_emotion.errors) }
         format.json { render json: @user_emotion.errors, status: :unprocessable_entity }
       end
     end
@@ -62,7 +38,7 @@ class UserEmotionsController < ApplicationController
   def destroy
     @user_emotion.destroy
     respond_to do |format|
-      format.html { redirect_to user_emotions_url, notice: "User emotion was successfully destroyed." }
+      format.html { redirect_back_page(notice: "success!") }      
       format.json { head :no_content }
     end
   end

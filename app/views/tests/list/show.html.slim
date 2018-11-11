@@ -13,10 +13,6 @@ div style="overflow: auto;"
           td
             = render "tests/list/td", date: day, emotion: @user_emotions.where(reported_on: day).where(team_user_id: u.id).first
 
-/ - @user_emotions.each do |e|
-/   p = e.id
-
-
 - (@month..@month.end_of_month).each do |day|
   .modal.fade id="emotion-modal-new-#{day.strftime('%Y%m%d')}" aria-hidden="true" aria-labelledby="emotion-modal-new-#{day.strftime('%Y%m%d')}" role="dialog" tabindex="-1" 
     .modal-dialog role="document" 

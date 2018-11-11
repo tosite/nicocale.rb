@@ -1,11 +1,4 @@
 = form_for [team, user_emotion] do |f|
-  - if @user_emotion.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@user_emotion.errors.count, "error")} prohibited this user_emotion from being saved:"
-      ul
-        - @user_emotion.errors.full_messages.each do |message|
-          li = message
-
   .radio
     label
       input#user_emotion_emotion_id_1 checked="checked" name="user_emotion[emotion_id]" type="radio" value="1"
