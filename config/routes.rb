@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :teams, only: %i(index new show create update destroy) do
     member { post :join }
     resources :user_emotions
-    namespace :tests do
+    namespace :emotions do
       resources :calendar, only: %i(show)
       resources :list,     only: %i(show)
     end
