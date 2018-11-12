@@ -1,6 +1,9 @@
-td
+td.text-center
   - if emotion.nil?
-    button.btn.btn-primary data-toggle="modal" data-target="#emotion-modal-new-#{date.strftime('%Y%m%d')}"
+    - if me
+      button.btn.btn-primary data-toggle="modal" data-target="#emotion-modal-new-#{date.strftime('%Y%m%d')}"
+        | -
+    - else
       | -
   - else
     - e = emotion.emotion
