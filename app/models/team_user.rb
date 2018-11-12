@@ -8,7 +8,11 @@ class TeamUser < ApplicationRecord
   validate   :exist_user_id
 
   scope :team_id, -> (team_id) { where(team_id: team_id) }
-  scope :user_id, -> (user_id) { where(user_id: current_user.id) }
+  scope :user_id, -> (user_id) { where(user_id: user_id) }
+
+  def self.joined?(team_id: team_id, user_id: user_id)
+    team_id(team_id).user_id(user_id).exists?
+  end
 
   private
     def exist_team_id

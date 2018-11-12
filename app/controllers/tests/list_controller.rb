@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Tests::ListController < ApplicationController
+  before_action :joined?
   # before_action :set_month
   # before_action :set_team_users
   # # GET /teams
@@ -8,7 +9,7 @@ class Tests::ListController < ApplicationController
   # def index
   #   @teams = Team.all
   # end
-
+  
   # GET /teams/1
   # GET /teams/1.json
   def show
@@ -18,4 +19,14 @@ class Tests::ListController < ApplicationController
     @user_emotions = UserEmotion.team_id(@team.id).eager_load(:emotion).reported_on_between(@month).all
     @user_emotion  = UserEmotion.new
   end
+
+  private
+    def joined?
+      unless TeamUser.joined?(team_id: params[:team_id], user_id: current_user.id)
+        respond_to do |format|
+          format.html { redirect_back_page(alerts: "404") }
+          format.json { render json: @team.errors, status: :unprocessable_entity }
+        end
+      end
+    end
 end

@@ -44,7 +44,6 @@ class UserEmotionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_user_emotion
       @user_emotion = current_user.user_emotions.find(params[:id])
     end
@@ -57,6 +56,6 @@ class UserEmotionsController < ApplicationController
     end
 
     def set_team_user
-      @team_user = current_user.team_users.find_by(team_id: params[:team_id])
+      @team_user = current_user.team_users.team_id(params[:team_id]).first
     end
 end
