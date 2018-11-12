@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
-  before_action :set_team,      only: [:show, :update, :destroy]
+  before_action :set_team,      only: [:show, :update, :join, :destroy]
   # before_action :set_team_user, only: [:show]
 
   # GET /teams
@@ -34,6 +34,18 @@ class TeamsController < ApplicationController
     respond_to do |format|
       if @team.save
         @team.team_users.create!(user_id: current_user.id)
+        format.html { redirect_back_page(notice: "success!") }
+        format.json { render :show, status: :created, location: @team }
+      else
+        format.html { redirect_back_page(alerts: @team.errors) }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def join
+    respond_to do |format|
+      if @team.team_users.create(user_id: current_user.id)
         format.html { redirect_back_page(notice: "success!") }
         format.json { render :show, status: :created, location: @team }
       else

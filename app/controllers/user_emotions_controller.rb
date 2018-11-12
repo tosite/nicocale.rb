@@ -50,7 +50,7 @@ class UserEmotionsController < ApplicationController
     end
 
     def user_emotion_params
-      p = params.require(:user_emotion).permit(:emotion_id, :description, :reported_on, :team_user_id)
+      p = params.require(:user_emotion).permit(:emotion_id, :description, :reported_on)
       p[:user_id] = @team_user.user_id
       p[:team_id] = @team_user.team_id
       p

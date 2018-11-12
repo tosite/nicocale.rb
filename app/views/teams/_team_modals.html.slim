@@ -1,23 +1,27 @@
-- current_user.team_users.each do |team_user|
-  - team = team_user.team
+- teams.each do |team|
   .modal.fade id="team-modal-#{team.id}" aria-hidden="true" aria-labelledby="exampleModalLabel" role="dialog" tabindex="-1" 
     .modal-dialog role="document" 
       .modal-content
         .modal-header
-          h5.modal-title = team.name
+          h5.modal-title
+            = team.name
+            = team.id
           button.close aria-label="Close" data-dismiss="modal" type="button" 
             span aria-hidden="true" &times;
         .modal-body
           .text-center
             = image_tag team.avatar, class: "rounded-circle avarar avatar-lg"
-          p.mt-2 = team.description
-          .collapse id="team-modal-form-#{team.id}"
-            = render "teams/form", team: team
+          -if joined
+            p.mt-2 = team.description
+            .collapse id="team-modal-form-#{team.id}"
+              = render "teams/form", team: team
         .modal-footer
           button.btn.btn-secondary data-dismiss="modal" type="button"  Close
-          .btn.btn-primary data-toggle="collapse" data-target="#team-modal-form-#{team.id}" aria-expanded="false" aria-controls="team-modal-form-#{team.id}" edit
-          = link_to "Show", team_tests_list_path(team.id, 201811), class: "btn btn-primary"
-
+          - if joined
+            .btn.btn-primary data-toggle="collapse" data-target="#team-modal-form-#{team.id}" aria-expanded="false" aria-controls="team-modal-form-#{team.id}" edit
+            = link_to "Show", team_tests_list_path(team.id, 201811), class: "btn btn-primary"
+          - else
+            = button_to "Join", join_team_path(team.id), method: :post, class: "btn btn-primary"
 
 .modal.fade id="team-modal-new" aria-hidden="true" aria-labelledby="exampleModalLabel" role="dialog" tabindex="-1" 
   .modal-dialog role="document" 

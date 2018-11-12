@@ -1,11 +1,14 @@
-h2 = @month.strftime("%Y年%m月")
+h2
+  = @team.name
+  small = " - #{@month.strftime("%Y年%m月")}"
 
 div style="overflow: auto;"
   table.table.table-hover
     tr
       th ユーザー名
       - (@month..@month.end_of_month).each do |day|
-        th = day.strftime("%d")
+        th.text-center
+          = day.strftime("%d").to_i
     - @team_users.each do |u|
       tr
         th = u.user.email
