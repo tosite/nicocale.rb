@@ -2,7 +2,6 @@
 
 class TeamsController < ApplicationController
   before_action :set_team,      only: [:show, :update, :join, :destroy]
-  # before_action :set_team_user, only: [:show]
 
   # GET /teams
   # GET /teams.json
@@ -15,16 +14,6 @@ class TeamsController < ApplicationController
   def show
     @user_emotion = current_user.user_emotions.new
   end
-
-  # GET /teams/new
-  def new
-    @team = Team.new
-  end
-
-  # GET /teams/1/edit
-  # def edit
-  #   # @new_team = Team.new
-  # end
 
   # POST /teams
   # POST /teams.json
@@ -80,16 +69,10 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
     end
 
-    # def set_team_user
-    #   @team_user = current_user.team_users.find_by(team_id: params[:id])
-    # end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       params.require(:team).permit(:name, :description, :avatar)
     end

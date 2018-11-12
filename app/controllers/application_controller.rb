@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
     if notice.length > 0
       return redirect_back(fallback_location: route, notice: notice)
     end
+    return redirect_back(fallback_location: route, alert: alerts) if alerts.kind_of?(String)
     if alerts.count > 0
       return redirect_back(fallback_location: route, alert: alerts.full_messages)
     end
