@@ -11,8 +11,8 @@
       #collapseOne.collapse aria-labelledby="headingOne" data-parent="#accordion" 
         .card-body.pa-0
           ul.list-unstyled.mb-0
-            - current_user.team_users.each do |team_user|
-              = render "teams/team_list", team: team_user.team, size: "avatar-sm"
+            - joined_teams.each do |team|
+              = render "teams/team_list", team: team, size: "avatar-sm"
 
     .card
       #headingOne.card-header

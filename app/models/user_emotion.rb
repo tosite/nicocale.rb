@@ -4,6 +4,8 @@ class UserEmotion < ApplicationRecord
   belongs_to :team_user
   belongs_to :user
   belongs_to :team
+  belongs_to :emotion
+
   validate   :exist_team_user_id
   validate   :exist_team_id
   validate   :exist_user_id

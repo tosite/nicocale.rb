@@ -15,7 +15,7 @@ class Tests::ListController < ApplicationController
     @team          = Team.find(params[:team_id])
     @month         = Date.parse("#{params[:id]}01")
     @team_users    = TeamUser.eager_load(:user).team_id(@team.id).all
-    @user_emotions = UserEmotion.team_id(@team.id).reported_on_between(@month).all
+    @user_emotions = UserEmotion.team_id(@team.id).eager_load(:emotion).reported_on_between(@month).all
     @user_emotion  = UserEmotion.new
   end
 end

@@ -38,7 +38,7 @@ class UserEmotionsController < ApplicationController
   def destroy
     @user_emotion.destroy
     respond_to do |format|
-      format.html { redirect_back_page(notice: "success!") }      
+      format.html { redirect_back_page(notice: "success!") }
       format.json { head :no_content }
     end
   end
@@ -50,7 +50,7 @@ class UserEmotionsController < ApplicationController
     end
 
     def user_emotion_params
-      p = params.require(:user_emotion).permit(:emotion_id, :description, :reported_on, :team_user_id)
+      p = params.require(:user_emotion).permit(:emotion_id, :description, :reported_on)
       p[:user_id] = @team_user.user_id
       p[:team_id] = @team_user.team_id
       p

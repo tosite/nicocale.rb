@@ -1,8 +1,13 @@
 h1 Listing teams
-
+h2 参加しているチーム
 ul.list-group
-  - current_user.team_users.each do |team_user|
-    = render "teams/team_list", team: team_user.team
+  - @joined_teams.each do |team|
+    = render "teams/team_list", team: team
+
+h2 参加していないチーム
+ul.list-group
+  - @not_joined_teams.each do |team|
+    = render "teams/team_list", team: team
 
 / = link_to 'New Team', new_team_path
 

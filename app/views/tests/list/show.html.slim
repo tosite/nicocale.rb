@@ -1,17 +1,19 @@
-h2 = @month.strftime("%Y年%m月")
+h2
+  = @team.name
+  small = " - #{@month.strftime("%Y年%m月")}"
 
 div style="overflow: auto;"
   table.table.table-hover
     tr
       th ユーザー名
       - (@month..@month.end_of_month).each do |day|
-        th = day.strftime("%d")
+        th.text-center
+          = day.strftime("%d").to_i
     - @team_users.each do |u|
       tr
         th = u.user.email
         - (@month..@month.end_of_month).each do |day|
-          td
-            = render "tests/list/td", date: day, emotion: @user_emotions.where(reported_on: day).where(team_user_id: u.id).first
+          = render "tests/list/td", date: day, emotion: @user_emotions.where(reported_on: day).where(team_user_id: u.id).first
 
 - (@month..@month.end_of_month).each do |day|
   .modal.fade id="emotion-modal-new-#{day.strftime('%Y%m%d')}" aria-hidden="true" aria-labelledby="emotion-modal-new-#{day.strftime('%Y%m%d')}" role="dialog" tabindex="-1" 
