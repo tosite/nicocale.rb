@@ -9,7 +9,7 @@ class Tests::ListController < ApplicationController
   # def index
   #   @teams = Team.all
   # end
-  
+
   # GET /teams/1
   # GET /teams/1.json
   def show
