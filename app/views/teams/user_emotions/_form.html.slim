@@ -1,16 +1,21 @@
 = form_for [team, user_emotion] do |f|
-  .radio
-    label
-      input#user_emotion_emotion_id_1 checked="checked" name="user_emotion[emotion_id]" type="radio" value="1"
-        | Good
-  .radio
-    label
-      input#user_emotion_emotion_id_2 name="user_emotion[emotion_id]" type="radio" value="2"
-        | Normal
-  .radio
-    label
-      input#user_emotion_emotion_id_3 name="user_emotion[emotion_id]" type="radio" value="3"
-        | Bad
+  / .radio
+  /   label
+  /     input#user_emotion_emotion_id_1 checked="checked" name="user_emotion[emotion_id]" type="radio" value="1"
+  /       | Good
+  / .radio
+  /   label
+  /     input#user_emotion_emotion_id_2 name="user_emotion[emotion_id]" type="radio" value="2"
+  /       | Normal
+  / .radio
+  /   label
+  /     input#user_emotion_emotion_id_3 name="user_emotion[emotion_id]" type="radio" value="3"
+  /       | Bad
+  - @emotions.each do |e|
+    .radio
+      label
+        input id="user_emotion_emotion_id_#{e.id}" name="user_emotion[emotion_id]" type="radio" value="#{e.id}"
+          = render "avatar", avatar: e.avatar, alt: e.name, size: "sm"
 
   .form-group
     = f.label :description, class: "bmd-label-floating"

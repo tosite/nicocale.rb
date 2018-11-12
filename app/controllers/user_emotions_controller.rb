@@ -38,7 +38,7 @@ class UserEmotionsController < ApplicationController
   def destroy
     @user_emotion.destroy
     respond_to do |format|
-      format.html { redirect_back_page(notice: "success!") }      
+      format.html { redirect_back_page(notice: "success!") }
       format.json { head :no_content }
     end
   end

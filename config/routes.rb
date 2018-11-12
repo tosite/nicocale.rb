@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :emotions
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

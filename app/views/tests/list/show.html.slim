@@ -10,8 +10,7 @@ div style="overflow: auto;"
       tr
         th = u.user.email
         - (@month..@month.end_of_month).each do |day|
-          td
-            = render "tests/list/td", date: day, emotion: @user_emotions.where(reported_on: day).where(team_user_id: u.id).first
+          = render "tests/list/td", date: day, emotion: @user_emotions.where(reported_on: day).where(team_user_id: u.id).first
 
 - (@month..@month.end_of_month).each do |day|
   .modal.fade id="emotion-modal-new-#{day.strftime('%Y%m%d')}" aria-hidden="true" aria-labelledby="emotion-modal-new-#{day.strftime('%Y%m%d')}" role="dialog" tabindex="-1" 

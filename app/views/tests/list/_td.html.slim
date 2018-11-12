@@ -1,6 +1,9 @@
-- if emotion.nil?
-  button.btn.btn-primary data-toggle="modal" data-target="#emotion-modal-new-#{date.strftime('%Y%m%d')}"
-    | create
-- else
-  button.btn.btn-primary data-toggle="modal" data-target="#emotion-modal-#{emotion.id}" = emotion.id
-  
+td
+  - if emotion.nil?
+    button.btn.btn-primary data-toggle="modal" data-target="#emotion-modal-new-#{date.strftime('%Y%m%d')}"
+      | -
+  - else
+    - e = emotion.emotion
+    button.btn.btn-primary.pa-0 data-toggle="modal" data-target="#emotion-modal-#{emotion.id}"
+      = render "avatar", avatar: e.avatar, alt: e.name, size: "xs"
+

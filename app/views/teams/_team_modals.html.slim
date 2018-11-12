@@ -16,7 +16,7 @@
         .modal-footer
           button.btn.btn-secondary data-dismiss="modal" type="button"  Close
           .btn.btn-primary data-toggle="collapse" data-target="#team-modal-form-#{team.id}" aria-expanded="false" aria-controls="team-modal-form-#{team.id}" edit
-          = link_to "Show", team_path(team.id), class: "btn btn-primary"
+          = link_to "Show", team_tests_list_path(team.id, 201811), class: "btn btn-primary"
 
 
 .modal.fade id="team-modal-new" aria-hidden="true" aria-labelledby="exampleModalLabel" role="dialog" tabindex="-1" 
