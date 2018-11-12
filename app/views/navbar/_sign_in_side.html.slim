@@ -4,26 +4,21 @@
 
   #accordion
     .card
-      #headingOne.card-header
+      #headingOne.card-header.pa-0
         h5.mb-0
-          button.btn.btn-link.collapsed aria-controls="collapseOne" aria-expanded="false" data-target="#collapseOne" data-toggle="collapse" 
-            | グループ
-      #collapseOne.collapse aria-labelledby="headingOne" data-parent="#accordion" 
+          button.btn.collapsed.btn-block.mb-0.pt-3.pb-3 aria-controls="collapseOne" aria-expanded="false" data-target="#collapseOne" data-toggle="collapse"
+            - if joined_teams.count == 0
+              | 参加していません😢
+            - else
+              | グループ
+      #collapseOne.collapse.show aria-labelledby="headingOne" data-parent="#accordion"
         .card-body.pa-0
           ul.list-unstyled.mb-0
             - joined_teams.each do |team|
               = render "teams/team_list", team: team, size: "avatar-sm"
 
     .card
-      #headingOne.card-header
+      #headingOne.card-header.pa-0
         h5.mb-0
-          a.btn.btn-link.collapsed href="#team-modal-new" data-toggle="modal"
+          a.btn.btn-block.collapsed.mb-0.pt-3.pb-3 href="#team-modal-new" data-toggle="modal"
             | 新しいグループ
-    .card
-      #headingThree.card-header
-        h5.mb-0
-          button.btn.btn-link.collapsed aria-controls="collapseThree" aria-expanded="false" data-target="#collapseThree" data-toggle="collapse" 
-            | Collapsible Group Item #3
-      #collapseThree.collapse aria-labelledby="headingThree" data-parent="#accordion" 
-        .card-body
-          | Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.

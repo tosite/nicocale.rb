@@ -1,5 +1,5 @@
 - size = "avatar-md" if size.nil?
-li.list-group-item.list-group-item-action.media href="#team-modal-#{team.id}" data-toggle="modal" style="border-bottom: 1px solid #ddd;"
+li.list-group-item.list-group-item-action.media.pt-2.pb-2.pointer href="#team-modal-#{team.id}" data-toggle="modal" style="border-bottom: 1px solid #ddd;"
   = image_tag team.avatar, class: "mr-2 rounded-circle avarar #{size}", alt: team.name
   .media-body
     h6.mt-0.mb-1 = team.name

@@ -1,6 +1,10 @@
 h2
+  = link_to team_emotions_list_path(@team.id, "#{(@month - 1.month).strftime("%Y%m")}"), class: "btn btn-primary"
+    i.material-icons keyboard_arrow_left
   = @team.name
   small = " - #{@month.strftime("%Y年%m月")}"
+  = link_to team_emotions_list_path(@team.id, "#{(@month + 1.month).strftime("%Y%m")}"), class: "btn btn-primary"
+    i.material-icons keyboard_arrow_right
 
 div style="overflow: auto;"
   table.table.table-hover
@@ -15,6 +19,7 @@ div style="overflow: auto;"
         - (@month..@month.end_of_month).each do |day|
           = render "emotions/list/td", date: day, emotion: @user_emotions.where(reported_on: day).where(team_user_id: u.id).first, me: u.user.id == current_user.id
 
+/ 新規モーダルウィンドウ
 - (@month..@month.end_of_month).each do |day|
   .modal.fade id="emotion-modal-new-#{day.strftime('%Y%m%d')}" aria-hidden="true" aria-labelledby="emotion-modal-new-#{day.strftime('%Y%m%d')}" role="dialog" tabindex="-1" 
     .modal-dialog role="document" 

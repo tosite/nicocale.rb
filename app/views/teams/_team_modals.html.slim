@@ -17,7 +17,7 @@
           button.btn.btn-secondary data-dismiss="modal" type="button"  Close
           - if joined
             .btn.btn-primary data-toggle="collapse" data-target="#team-modal-form-#{team.id}" aria-expanded="false" aria-controls="team-modal-form-#{team.id}" edit
-            = link_to "Show", team_emotions_list_path(team.id, 201811), class: "btn btn-primary"
+            = link_to "Show", team_emotions_list_path(team.id, Date.current.strftime("%Y%m")), class: "btn btn-primary"
           - else
             = button_to "Join", join_team_path(team.id), method: :post, class: "btn btn-primary"
 
