@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2018_11_11_074640) do
+
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,10 +41,12 @@ ActiveRecord::Schema.define(version: 2018_11_11_074640) do
   end
 
   create_table "team_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "team_id"
+    t.integer "user_id", null: false
+    t.integer "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_users_on_team_id"
+    t.index ["user_id"], name: "index_team_users_on_user_id"
   end
 
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -56,14 +57,19 @@ ActiveRecord::Schema.define(version: 2018_11_11_074640) do
   end
 
   create_table "user_emotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "emotion_id"
-    t.integer "team_user_id"
-    t.integer "user_id"
-    t.integer "team_id"
+    t.integer "emotion_id", null: false
+    t.integer "team_user_id", null: false
+    t.integer "user_id", null: false
+    t.integer "team_id", null: false
     t.text "description"
-    t.date "reported_on"
+    t.date "reported_on", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["emotion_id"], name: "index_user_emotions_on_emotion_id"
+    t.index ["reported_on"], name: "index_user_emotions_on_reported_on"
+    t.index ["team_id"], name: "index_user_emotions_on_team_id"
+    t.index ["team_user_id"], name: "index_user_emotions_on_team_user_id"
+    t.index ["user_id"], name: "index_user_emotions_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -89,4 +95,5 @@ ActiveRecord::Schema.define(version: 2018_11_11_074640) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 end
