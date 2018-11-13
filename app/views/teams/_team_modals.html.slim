@@ -8,7 +8,7 @@
             span aria-hidden="true" &times;
         .modal-body
           .text-center
-            = image_tag team.avatar, class: "rounded-circle avarar avatar-lg"
+            = render "avatar", avatar: team.avatar, size: "lg", alt: team.name, frame: true
           -if joined
             p.mt-2 = team.description
             .collapse id="team-modal-form-#{team.id}"
