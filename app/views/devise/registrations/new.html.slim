@@ -10,14 +10,25 @@
     .card-text
       = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
         .form-group
+          = f.label :account_id, class: "bmd-label-floating"
+          = f.text_field :account_id, class: "form-control", autofocus: true, required: true
+
+        .form-group
+          = f.label :name, class: "bmd-label-floating"
+          = f.text_field :name, class: "form-control", required: true
+
+        .form-group
           = f.label :email, class: "bmd-label-floating"
-          = f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", required: true
+          = f.email_field :email, class: "form-control", autocomplete: "email", required: true
+
         .form-group
           = f.label :password, class: "bmd-label-floating"
           = f.password_field :password, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
+
         .form-group
           = f.label :password_confirmation, class: "bmd-label-floating"
           = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
+
         .actions
           = f.submit "Sign up", class: "btn btn-primary btn-raised btn-block btn-lg"
       = render "devise/shared/links"
