@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :emotions
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
@@ -10,6 +9,10 @@ Rails.application.routes.draw do
   devise_for :users
   devise_scope :user do
     get "/users/sign_out" => "devise/sessions#destroy"
+  end
+
+  namespace :admin do
+    resources :emotions, only: %i(index new edit create update)
   end
 
   resources :teams, only: %i(index new show create update destroy) do

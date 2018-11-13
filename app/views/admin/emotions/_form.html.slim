@@ -1,0 +1,17 @@
+= form_with model: [:admin, emotion] do |f|
+
+  .form-group
+    = f.label :score, class: "bmd-label-floating"
+    = f.number_field :score, class: "form-control"
+
+  .form-group
+    = f.label :name, class: "bmd-label-floating"
+    = f.text_field :name, class: "form-control"
+
+  .input-group.mb-3
+    .custom-file
+      = f.file_field :avatar, class: "custom-file-input"
+      label.custom-file-label for="emotion_avatar" Choose file
+
+  .actions
+    = f.submit "更新する", class: "btn btn-primary btn-raised btn-block btn-lg"

@@ -1,0 +1,23 @@
+h1 Listing emotions
+
+table
+  thead
+    tr
+      th Image
+      th Name
+      th Score
+      th
+      th
+      th
+
+  tbody
+    - @emotions.each do |emotion|
+      tr
+        td
+          = image_tag emotion.avatar, class: "mr-2 rounded-circle avarar avatar-md", alt: emotion.name
+        td = emotion.name
+        td = emotion.score
+        td = link_to 'Edit', edit_admin_emotion_path(emotion)
+
+
+= link_to 'New Emotion', new_admin_emotion_path

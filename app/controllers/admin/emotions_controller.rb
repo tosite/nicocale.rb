@@ -1,17 +1,12 @@
 # frozen_string_literal: true
 
-class EmotionsController < ApplicationController
+class Admin::EmotionsController < ApplicationController
   before_action :set_emotion, only: [:show, :edit, :update, :destroy]
 
   # GET /emotions
   # GET /emotions.json
   def index
     @emotions = Emotion.all
-  end
-
-  # GET /emotions/1
-  # GET /emotions/1.json
-  def show
   end
 
   # GET /emotions/new
@@ -53,23 +48,11 @@ class EmotionsController < ApplicationController
     end
   end
 
-  # DELETE /emotions/1
-  # DELETE /emotions/1.json
-  def destroy
-    @emotion.destroy
-    respond_to do |format|
-      format.html { redirect_to emotions_url, notice: "Emotion was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_emotion
       @emotion = Emotion.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def emotion_params
       params.require(:emotion).permit(:score, :name, :avatar)
     end
