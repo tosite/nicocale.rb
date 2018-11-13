@@ -29,6 +29,11 @@
           = f.label :password_confirmation, class: "bmd-label-floating"
           = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
 
+        .input-group.mb-3
+          .custom-file
+            = f.file_field :avatar, class: "custom-file-input"
+            label.custom-file-label for="team_avatar" Choose file
+
         .actions
           = f.submit "Sign up", class: "btn btn-primary btn-raised btn-block btn-lg"
       = render "devise/shared/links"
