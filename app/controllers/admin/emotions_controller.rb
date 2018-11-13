@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmotionsController < ApplicationController
+class Admin::EmotionsController < ApplicationController
   before_action :set_emotion, only: [:show, :edit, :update, :destroy]
 
   # GET /emotions

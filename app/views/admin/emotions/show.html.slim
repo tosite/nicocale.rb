@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Score:
+  = @emotion.score
+p
+  strong Name:
+  = @emotion.name
+
+=> link_to 'Edit', edit_emotion_path(@emotion)
+'|
+=< link_to 'Back', emotions_path
