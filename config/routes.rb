@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :emotions
+    resources :emotions, only: %i(index new edit create update)
   end
 
   resources :teams, only: %i(index new show create update destroy) do
