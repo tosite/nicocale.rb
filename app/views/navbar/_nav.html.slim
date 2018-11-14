@@ -16,13 +16,6 @@ header.bmd-layout-header
             = link_to "Login", new_user_session_path, class: "nav-link"
           li.nav-item
             = link_to "Signup", new_user_registration_path, class: "nav-link"
-
-- if user_signed_in?
-  = render "navbar/sign_in_side", joined_teams: @joined_teams
-  = render "teams/team_modals",   teams: @joined_teams,     joined: true
-  = render "teams/team_modals",   teams: @not_joined_teams, joined: false
-- else
-  = render "navbar/not_sign_in_side"
   / ul.list-group
   /   a.list-group-item
   /     img.img-thumbnail.rounded-circle src="https://pbs.twimg.com/profile_images/973333970657067009/nLexGc0s_400x400.jpg"

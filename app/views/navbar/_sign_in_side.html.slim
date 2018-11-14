@@ -1,24 +1,34 @@
 #sidebar.bmd-layout-drawer.bg-faded
-  header
-    a.navbar-brand Title
-    = link_to "user", edit_user_registration_path
+  / header.pa-0
+  /   = render "devise/partial/user_card", user: current_user
+  /   / a.navbar-brand Title
+  /   / = link_to "user", edit_user_registration_path
   #accordion
     .card
-      #headingOne.card-header.pa-0
+      #heading-1.card-header.pa-0
         h5.mb-0
-          button.btn.collapsed.btn-block.mb-0.pt-3.pb-3 aria-controls="collapseOne" aria-expanded="false" data-target="#collapseOne" data-toggle="collapse"
+          a.btn.btn-block.collapsed.mb-0.pt-3.pb-3.text-left href="#user-modal-#{current_user.account_id}" data-toggle="modal"
+            .mb-2
+              = render "avatar", avatar: current_user.avatar, size: "sm", alt: current_user.name, frame: true, css: "mr-2"
+              = current_user.name
+            p.text-muted.mb-0 = "@#{current_user.account_id}"
+
+    .card
+      #heading-2.card-header.pa-0
+        h5.mb-0
+          button.btn.collapsed.btn-block.mb-0.pt-3.pb-3 aria-controls="collapseOne" aria-expanded="false" data-target="#collapse-2" data-toggle="collapse"
             - if joined_teams.count == 0
               | 参加していません😢
             - else
               | グループ
-      #collapseOne.collapse.show aria-labelledby="headingOne" data-parent="#accordion"
+      #collapse-3.collapse.show aria-labelledby="heading-2" data-parent="#accordion"
         .card-body.pa-0
           ul.list-unstyled.mb-0
             - joined_teams.each do |team|
-              = render "teams/team_list", team: team, size: "avatar-sm"
+              = render "teams/team_list", team: team, size: "xs", frame: true
 
     .card
-      #headingOne.card-header.pa-0
+      #heading-4.card-header.pa-0
         h5.mb-0
           a.btn.btn-block.collapsed.mb-0.pt-3.pb-3 href="#team-modal-new" data-toggle="modal"
             | 新しいグループ

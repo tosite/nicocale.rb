@@ -4,8 +4,9 @@
 - avatar    = asset_path("default.png") if avatar.nil? || avatar.attachment.nil?
 - thumbnail = (frame) ? "img-thumbnail" : ""
 - id        = "" if id.nil?
+- css       = "" if css.nil?
 
 - if id == ""
-  = image_tag avatar, class: "rounded-circle avarar avatar-#{size} #{thumbnail}", alt: "#{alt}"
+  = image_tag avatar, class: "rounded-circle avarar avatar-#{size} #{thumbnail} #{css}", alt: "#{alt}"
 - else
-  = image_tag avatar, class: "rounded-circle avarar avatar-#{size} #{thumbnail}", alt: "#{alt}", id: "#{id}"
+  = image_tag avatar, class: "rounded-circle avarar avatar-#{size} #{thumbnail} #{css}", alt: "#{alt}", id: "#{id}"

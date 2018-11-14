@@ -1,0 +1,11 @@
+.modal.fade id="team-modal-new" aria-hidden="true" aria-labelledby="exampleModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog role="document" 
+    .modal-content
+      .modal-header
+        h5.modal-title New Team
+        button.close aria-label="Close" data-dismiss="modal" type="button" 
+          span aria-hidden="true" &times;
+      .modal-body
+        = render "teams/form", team: Team.new
+      .modal-footer
+        button.btn.btn-secondary data-dismiss="modal" type="button" Close

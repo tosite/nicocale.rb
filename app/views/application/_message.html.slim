@@ -8,7 +8,7 @@
       - alert.each do |message|
         p.mb-0.ml-3 = message
 
-- unless resource.errors.nil?
+- if (defined? resource) && !resource.errors.nil? && resource.errors.count > 0
   .alert.alert-warning.alert-dismissible.fade.show role="alert"
     button.close type="button" data-dismiss="alert" aria-label="close"
       span aria-hidden="true" &times
