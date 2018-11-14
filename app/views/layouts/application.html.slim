@@ -125,5 +125,9 @@ script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sh
 script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"
 script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"
 javascript:
-  $(document).ready(function() { $("body").bootstrapMaterialDesign() })
+  $(document).ready(() => {
+    $("body").bootstrapMaterialDesign()
+    $('[data-toggle="popover"]').popover()
+    $('.popover-dismiss').popover({ trigger: 'focus' })
+  })
 

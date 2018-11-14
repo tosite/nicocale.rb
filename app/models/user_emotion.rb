@@ -14,6 +14,7 @@ class UserEmotion < ApplicationRecord
 
   scope :reported_on_between, -> (month) { where(reported_on: month..month.end_of_month).all }
   scope :team_id,             -> (team_id) { where(team_id: team_id) }
+  scope :user_id,             -> (user_id) { where(user_id: user_id) }
 
   private
     def exist_team_user_id
