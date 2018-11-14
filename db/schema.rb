@@ -42,10 +42,12 @@ ActiveRecord::Schema.define(version: 2018_11_11_074640) do
   end
 
   create_table "team_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "team_id"
+    t.integer "user_id", null: false
+    t.integer "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_users_on_team_id"
+    t.index ["user_id"], name: "index_team_users_on_user_id"
   end
 
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -56,18 +58,26 @@ ActiveRecord::Schema.define(version: 2018_11_11_074640) do
   end
 
   create_table "user_emotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "emotion_id"
-    t.integer "team_user_id"
-    t.integer "user_id"
-    t.integer "team_id"
+    t.integer "emotion_id", null: false
+    t.integer "team_user_id", null: false
+    t.integer "user_id", null: false
+    t.integer "team_id", null: false
     t.text "description"
-    t.date "reported_on"
+    t.date "reported_on", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["emotion_id"], name: "index_user_emotions_on_emotion_id"
+    t.index ["reported_on"], name: "index_user_emotions_on_reported_on"
+    t.index ["team_id"], name: "index_user_emotions_on_team_id"
+    t.index ["team_user_id"], name: "index_user_emotions_on_team_user_id"
+    t.index ["user_id"], name: "index_user_emotions_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
+    t.string "account_id", default: "", null: false
+    t.text "description"
+    t.string "name", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
