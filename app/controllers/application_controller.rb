@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_common_team
   before_action :set_emotions
-  before_action :add_permit_params, if: :devise_controller?
 
   def set_common_team
     return true unless user_signed_in?
@@ -26,12 +25,5 @@ class ApplicationController < ActionController::Base
     if alerts.count > 0
       return redirect_back(fallback_location: route, alert: alerts.full_messages)
     end
-  end
-
-  def add_permit_params
-    added_attrs = [:name, :account_id, :email, :password, :password_confirmation, :avatar]
-    devise_parameter_sanitizer.permit :sign_up,        keys: added_attrs
-    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
-    devise_parameter_sanitizer.permit :sign_in,        keys: added_attrs
   end
 end

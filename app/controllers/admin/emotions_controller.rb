@@ -25,10 +25,10 @@ class Admin::EmotionsController < ApplicationController
 
     respond_to do |format|
       if @emotion.save
-        format.html { redirect_back_page(notice: "success!") }
+        format.html { redirect_to @emotion, notice: "Emotion was successfully created." }
         format.json { render :show, status: :created, location: @emotion }
       else
-        format.html { redirect_back_page(alerts: @emotion.errors) }
+        format.html { render :new }
         format.json { render json: @emotion.errors, status: :unprocessable_entity }
       end
     end
@@ -39,10 +39,10 @@ class Admin::EmotionsController < ApplicationController
   def update
     respond_to do |format|
       if @emotion.update(emotion_params)
-        format.html { redirect_back_page(notice: "success!") }
-        format.json { render :show, status: :created, location: @emotion }
+        format.html { redirect_to @emotion, notice: "Emotion was successfully updated." }
+        format.json { render :show, status: :ok, location: @emotion }
       else
-        format.html { redirect_back_page(alerts: @emotion.errors) }
+        format.html { render :edit }
         format.json { render json: @emotion.errors, status: :unprocessable_entity }
       end
     end
