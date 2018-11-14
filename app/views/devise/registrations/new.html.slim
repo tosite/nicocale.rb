@@ -25,10 +25,12 @@
         .form-group
           = f.label :password, class: "bmd-label-floating"
           = f.password_field :password, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
+          .bmd-help パスワードは６文字以上で入力してください。
 
         .form-group
           = f.label :password_confirmation, class: "bmd-label-floating"
           = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
+          .bmd-help 確認のため、もう一度パスワードを入力してください。
 
         .actions
           = f.submit "Sign up", class: "btn btn-primary btn-raised btn-block btn-lg"

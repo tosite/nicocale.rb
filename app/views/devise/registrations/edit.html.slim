@@ -1,42 +1,35 @@
-h2
-  | Edit 
-  = resource_name.to_s.humanize
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div
-      | Currently waiting confirmation for: 
-      = resource.unconfirmed_email
-  .field
-    = f.label :password
-    i
-      | (leave blank if you don't want to change it)
-    br
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      br
-      em
-        = @minimum_password_length
-        |  characters minimum
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    i
-      | (we need your current password to confirm your changes)
-    br
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "Update"
-h3
-  | Cancel my account
-p
-  | Unhappy? 
-  = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
-= link_to "Back", :back
+.card
+  .card-body
+    h2.card-title
+      | Edit
+    .card-text
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        .text-center
+          = render "avatar", avatar: resource.avatar, id: "test", size: "lg", frame: true
+
+        .form-group
+          = f.label :name, class: "bmd-label-floating"
+          = f.text_field :name, class: "form-control", required: true
+          .bmd-help 最大５０文字で入力してください。
+
+        .form-group
+          = f.label :email, class: "bmd-label-floating"
+          = f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email"
+          .bmd-help 新しいメールアドレスを入力してください。
+          .bmd-help 変更後、新しいメールアドレス宛に確認メールが届きます。
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          .text-danger = "#{resource.unconfirmed_email}宛にメールアドレスを送っています。確認してください。"
+
+        .form-group
+          = f.label :current_password, class: "bmd-label-floating"
+          = f.password_field :current_password, class: "form-control", autocomplete: "current-password", required: true, minlength: 6
+          .bmd-help パスワードは６文字以上で入力してください。
+
+        .input-group.mb-3
+          .custom-file
+            = f.file_field :avatar, class: "custom-file-input"
+            label.custom-file-label for="team_avatar" Choose file
+
+        .actions
+          = f.submit "Update", class: "btn btn-primary btn-raised btn-block btn-lg"
+  / = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
