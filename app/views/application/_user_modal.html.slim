@@ -1,0 +1,18 @@
+- me = false if me.nil?
+
+.modal.fade id="user-modal-#{user.account_id}" aria-hidden="true" role="dialog" tabindex="-1" 
+  .modal-dialog role="document" 
+    .modal-content
+      .modal-header
+        h5.modal-title = user.name
+          span.text-muted = "@#{user.account_id}"
+        button.close aria-label="Close" data-dismiss="modal" type="button" 
+          span aria-hidden="true" &times;
+      .modal-body
+        .text-center
+          = render "avatar", avatar: user.avatar, size: "lg", alt: user.name, frame: true
+        h5 = "@#{user.account_id}"
+      .modal-footer
+        button.btn.btn-secondary data-dismiss="modal" type="button" Close
+        - if me
+          = link_to "edit", edit_user_registration_path, class: "btn btn-primary"

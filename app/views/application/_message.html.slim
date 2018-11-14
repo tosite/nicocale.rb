@@ -2,21 +2,18 @@
   .alert.alert-warning.alert-dismissible.fade.show role="alert"
     button.close type="button" data-dismiss="alert" aria-label="close"
       span aria-hidden="true" &times
-    / h5
-    /   i.material-icons error
-    /   | データが更新できませんでした
     - if alert.class == String
       p.mb-0.ml-3 = alert
     - else
       - alert.each do |message|
         p.mb-0.ml-3 = message
 
-/ - unless alert.nil?
-/   #error_explanation
-/     h2 = "#{pluralize(alert.count, "error")} prohibited this user_emotion from being saved:"
-/     ul
-/       - alert.each do |message|
-/         li = message
+- if (defined? resource) && !resource.errors.nil? && resource.errors.count > 0
+  .alert.alert-warning.alert-dismissible.fade.show role="alert"
+    button.close type="button" data-dismiss="alert" aria-label="close"
+      span aria-hidden="true" &times
+    - resource.errors.full_messages.each do |message|
+      p.mb-0.ml-3 = message
 
 - unless notice.nil?
   .alert.alert-info.alert-dismissible.fade.show role="alert"

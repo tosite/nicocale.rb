@@ -27,6 +27,9 @@ html.is-application lang="ja"
       .avatar-lg
         width: 128px
         height: 128px
+      .avatar-xl
+        width: 256px
+        height: 256px
       .modal-backdrop
         display: none
       .bmd-layout-header
@@ -105,11 +108,22 @@ html.is-application lang="ja"
         .container
           = render "message"
           = yield
+      - if user_signed_in?
+        = render "navbar/sign_in_side", joined_teams: @joined_teams
+        = render "user_modal",          user:  current_user,      me: true
 
+        - @joined_teams.each do |team|
+          = render "teams/team_modal", team: team, joined: true
+        - @not_joined_teams.each do |team|
+          = render "teams/team_modal", team: team, joined: false
+        = render "teams/new_team_modal"
+
+      - else
+        = render "navbar/not_sign_in_side"
 script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"
 script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"
 script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"
 script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"
 javascript:
-  $(document).ready(function() { $('body').bootstrapMaterialDesign() })
+  $(document).ready(function() { $("body").bootstrapMaterialDesign() })
 

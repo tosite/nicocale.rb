@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
 
   def set_common_team
     return true unless user_signed_in?
-    @new_team         = Team.new
     team_ids          = current_user.team_users.all.pluck(:team_id).uniq
     @joined_teams     = Team.where(id: team_ids)
     @not_joined_teams = Team.where.not(id: team_ids)

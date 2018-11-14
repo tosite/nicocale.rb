@@ -1,8 +1,3 @@
-/ .alert.alert-warning.alert-dismissible.fade.show role="alert"
-/   button.close type="button" data-dismiss="alert" aria-label="close"
-/     span aria-hidden="true" &times
-/   = devise_error_messages!
-
 .card
   .card-body
     h2.card-title
@@ -12,27 +7,30 @@
         .form-group
           = f.label :account_id, class: "bmd-label-floating"
           = f.text_field :account_id, class: "form-control", autofocus: true, required: true
+          .bmd-help 最大１５文字で入力してください。
+          .bmd-help アカウントIDは後で変更できません。
 
         .form-group
           = f.label :name, class: "bmd-label-floating"
           = f.text_field :name, class: "form-control", required: true
+          .bmd-help 最大５０文字で入力してください。
+          .bmd-help ユーザー名は後で変更できます。
 
         .form-group
           = f.label :email, class: "bmd-label-floating"
           = f.email_field :email, class: "form-control", autocomplete: "email", required: true
+          .bmd-help お使いのメールアドレスを入力してください。
+          .bmd-help ユーザー仮登録後、このメールアドレス宛に確認メールが届きます。
 
         .form-group
           = f.label :password, class: "bmd-label-floating"
           = f.password_field :password, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
+          .bmd-help パスワードは６文字以上で入力してください。
 
         .form-group
           = f.label :password_confirmation, class: "bmd-label-floating"
           = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", required: true, minlength: 6
-
-        .input-group.mb-3
-          .custom-file
-            = f.file_field :avatar, class: "custom-file-input"
-            label.custom-file-label for="team_avatar" Choose file
+          .bmd-help 確認のため、もう一度パスワードを入力してください。
 
         .actions
           = f.submit "Sign up", class: "btn btn-primary btn-raised btn-block btn-lg"
