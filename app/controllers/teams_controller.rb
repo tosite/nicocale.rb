@@ -6,7 +6,9 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @user_emotions_for_today = {}
+    rows = current_user.user_emotions.e.on(Date.current)
+    rows.each { |row| @user_emotions_for_today[row.team_id] = row }
   end
 
   # GET /teams/1

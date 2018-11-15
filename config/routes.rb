@@ -24,9 +24,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :team_users do
-  # resources :teams
-  # end
+  get "/api/teams/:team_id/emotions/:emotion_id" => "user_emotions#modify"
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

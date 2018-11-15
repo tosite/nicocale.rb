@@ -12,9 +12,18 @@ class UserEmotion < ApplicationRecord
   validates  :reported_on, presence: true
   validates  :description, length: { maximum: 200 }
 
-  scope :reported_on_between, -> (month) { where(reported_on: month..month.end_of_month).all }
-  scope :team_id,             -> (team_id) { where(team_id: team_id) }
-  scope :user_id,             -> (user_id) { where(user_id: user_id) }
+  scope :on_between, -> (month)   { where(reported_on: month..month.end_of_month) }
+  scope :on,         -> (day)     { where(reported_on: day) }
+  scope :team_id,    -> (team_id) { where(team_id: team_id) }
+  scope :user_id,    -> (user_id) { where(user_id: user_id) }
+
+  def self.e
+    eager_load(:emotion)
+  end
+
+  def self.u
+    eager_load(:user)
+  end
 
   private
     def exist_team_user_id

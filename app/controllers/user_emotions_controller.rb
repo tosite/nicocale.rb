@@ -33,6 +33,32 @@ class UserEmotionsController < ApplicationController
     end
   end
 
+  # GET /api/teams/:team_id/emotions/:emotion_id
+  # params
+  def modify
+    team          = Team.find(params[:team_id])
+    emotion       = Emotion.find(params[:emotion_id])
+    team_user     = current_user.team_users.team_id(team.id).first
+    description ||= params[:description]
+    reported_on   = (params[:reported_on].nil?) ? Date.current : params[:reported_on]
+
+    u = UserEmotion.find_or_create_by(team_user_id: team_user.id, reported_on: reported_on)
+    u.emotion_id  = emotion.id
+    u.team_id     = team_user.team_id
+    u.user_id     = team_user.user_id
+    u.description = description unless description.nil?
+
+    respond_to do |format|
+      if u.save
+        format.html { redirect_back_page(notice: "success!") }
+        format.json { render :show, status: :ok, location: @user_emotion }
+      else
+        format.html { redirect_back_page(alerts: "errors!") }
+        format.json { render json: @user_emotion.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /user_emotions/1
   # DELETE /user_emotions/1.json
   def destroy
