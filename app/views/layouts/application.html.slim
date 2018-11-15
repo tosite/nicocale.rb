@@ -113,7 +113,7 @@ html.is-application lang="ja"
 
 
   body
-    .bmd-layout-container.bmd-drawer-f-l.bmd-drawer-overlay style="position: relative;"
+    .bmd-layout-container.bmd-drawer-f-l.bmd-drawer-overlay
       = render "navbar/nav"
       main.bmd-layout-content
         .mb-4
@@ -139,7 +139,7 @@ script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-
 javascript:
   $(document).ready(() => {
     $("body").bootstrapMaterialDesign()
-    $('[data-toggle="popover"]').popover()
-    $('.popover-dismiss').popover({ trigger: 'focus' })
+    $("[data-toggle='popover']").popover()
+    $(".popover-dismiss").popover({ trigger: "focus" })
   })
 
