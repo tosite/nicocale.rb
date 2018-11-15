@@ -1,3 +1,12 @@
+javascript:
+  function setNewModal(day, title) {
+    trg = $("#new_user_emotion #user_emotion_reported_on")
+    console.log(trg.val(), day, title)
+    trg.val(day)
+    $("#emotion-new-modal").html(title)
+  }
+
+
 h2
   = link_to team_emotions_list_path(@team.id, "#{(@month - 1.month).strftime("%Y%m")}"), class: "btn btn-primary"
     i.material-icons keyboard_arrow_left
@@ -13,29 +22,62 @@ div style="overflow: auto;"
       - (@month..@month.end_of_month).each do |day|
         th.text-center
           = day.strftime("%d").to_i
+
+    / user == me
+    tr
+      th
+        = render "avatar", avatar: current_user.avatar, alt: current_user.name, size: "xs", frame: true, css: "mr-1"
+        = current_user.name
+      - (@month..@month.end_of_month).each do |day|
+        - ue = @calendar[@me.user_id][day.strftime("%Y-%m-%d")]
+        td.text-center.pt-2.pb-1.pl-0.pr-0
+          - if ue.class != UserEmotion
+            button.btn.btn-primary data-toggle="modal" data-target="#emotion-modal-new" onclick="setNewModal(`#{day.strftime('%Y-%m-%d')}`, `#{day.strftime('%m月%d日のキモチ')}`)"
+              = render "avatar", size: "xs"
+          - else
+            - e = ue.emotion
+            - if !ue.description.nil? && ue.description != ""
+              .emotion-comment
+            button.btn.btn-primary data-toggle="modal" data-target="#emotion-modal-#{ue.id}"
+              = render "avatar", avatar: e.avatar, alt: e.name, size: "xs", css: "mr-1"
+
+    / user == member
     - @team_users.each do |u|
+      - next if u.user_id == current_user.id
       tr
-        th = u.user.email
+        th
+          = render "avatar", avatar: u.user.avatar, alt: u.user.name, size: "xs", frame: true
+          = u.user.name
         - (@month..@month.end_of_month).each do |day|
-          = render "emotions/list/td", date: day, emotion: @user_emotions.where(reported_on: day).where(team_user_id: u.id).first, me: u.user.id == current_user.id
+          - ue = @calendar[u.user_id][day.strftime("%Y-%m-%d")]
+          td.text-center.pt-2.pb-1.pl-0.pr-0
+            - if ue.class != UserEmotion
+              button.btn.btn-primary disabled=true
+                = render "avatar", size: "xs"
+            - else
+              - e = ue.emotion
+              - if !ue.description.nil? && ue.description != ""
+                .emotion-comment
+                button.btn.btn-primary data-toggle="popover" title="comment" data-content="test" data-trigger="focus" tabindex="0"
+                  = render "avatar", avatar: e.avatar, alt: e.name, size: "xs"
+              - else
+                button.btn.btn-primary
+                  = render "avatar", avatar: e.avatar, alt: e.name, size: "xs"
 
 / 新規モーダルウィンドウ
-- (@month..@month.end_of_month).each do |day|
-  .modal.fade id="emotion-modal-new-#{day.strftime('%Y%m%d')}" aria-hidden="true" aria-labelledby="emotion-modal-new-#{day.strftime('%Y%m%d')}" role="dialog" tabindex="-1" 
-    .modal-dialog role="document" 
-      .modal-content
-        .modal-header
-          h5#emotion-new-modal.modal-title = day.strftime("%m月%d日のキモチ")
-          button.close aria-label="Close" data-dismiss="modal" type="button" 
-            span aria-hidden="true"  &times;
-        .modal-body
-          = render "teams/user_emotions/form", user_emotion: @user_emotion, team: @team, date: day, user: current_user.id
-        .modal-footer
-          button.btn.btn-secondary data-dismiss="modal" type="button"  Close
-          button.btn.btn-primary type="button"  Save changes
+.modal.fade id="emotion-modal-new" aria-hidden="true" aria-labelledby="emotion-modal-new" role="dialog" tabindex="-1" 
+  .modal-dialog role="document" 
+    .modal-content
+      .modal-header
+        h5#emotion-new-modal.modal-title キモチ
+        button.close aria-label="Close" data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+      .modal-body
+        = render "teams/user_emotions/form", user_emotion: UserEmotion.new, team: @team, date: "2018-11-01", user: current_user.id
+
 
 / 自分自身のモーダルウィンドウ
-- @user_emotions.where(user_id: current_user.id).each do |e|
+- @own_emotions.each do |e|
   .modal.fade id="emotion-modal-#{e.id}" aria-hidden="true" aria-labelledby="emotion-modal-#{e.id}" role="dialog" tabindex="-1" 
     .modal-dialog role="document" 
       .modal-content
@@ -45,22 +87,3 @@ div style="overflow: auto;"
             span aria-hidden="true"  &times;
         .modal-body
           = render "teams/user_emotions/form", user_emotion: e, team: @team, date: e.reported_on
-        .modal-footer
-          button.btn.btn-secondary data-dismiss="modal" type="button"  Close
-          button.btn.btn-primary type="button"  Save changes
-
-/ 他人のモーダルウィンドウ
-- @user_emotions.where.not(user_id: current_user.id).each do |e|
-  .modal.fade id="emotion-modal-#{e.id}" aria-hidden="true" aria-labelledby="emotion-modal-#{e.id}" role="dialog" tabindex="-1" 
-    .modal-dialog role="document" 
-      .modal-content
-        .modal-header
-          h5#emotion-new-modal.modal-title = e.reported_on.strftime("%m月%d日のキモチ")
-          button.close aria-label="Close" data-dismiss="modal" type="button" 
-            span aria-hidden="true"  &times;
-        .modal-body
-          .text-center
-            = render "avatar", avatar: e.emotion.avatar, alt: e.emotion.name, size: "md"
-          p = e.description
-        .modal-footer
-          button.btn.btn-secondary data-dismiss="modal" type="button"  Close

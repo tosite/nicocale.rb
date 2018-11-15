@@ -10,8 +10,11 @@ html.is-application lang="ja"
     = csrf_meta_tags
     / = render "favicons"
     sass:
+      body
+        position: relative
       main
         min-height: calc(100vh - 56px)
+        position: relative
       .avatar
         object-fit: cover
         background-color: #ccc
@@ -100,17 +103,26 @@ html.is-application lang="ja"
         margin: 0
       .pointer
         cursor: pointer
-  body style="position: relative;"
-    .bmd-layout-container.bmd-drawer-f-l.bmd-drawer-overlay style="position: relative;"
+      .emotion-comment
+        position: relative
+      .emotion-comment:before
+        position: absolute
+        content:  "💬"
+        right:    -5px
+        top:      -5px
+
+
+  body
+    .bmd-layout-container.bmd-drawer-f-l.bmd-drawer-overlay
       = render "navbar/nav"
-      main.bmd-layout-content style="position: relative;"
+      main.bmd-layout-content
         .mb-4
         .container
           = render "message"
           = yield
       - if user_signed_in?
         = render "navbar/sign_in_side", joined_teams: @joined_teams
-        = render "user_modal",          user:  current_user,      me: true
+        = render "user_modal",          user: current_user, me: true
 
         - @joined_teams.each do |team|
           = render "teams/team_modal", team: team, joined: true
@@ -125,5 +137,9 @@ script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sh
 script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"
 script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"
 javascript:
-  $(document).ready(function() { $("body").bootstrapMaterialDesign() })
+  $(document).ready(() => {
+    $("body").bootstrapMaterialDesign()
+    $("[data-toggle='popover']").popover()
+    $(".popover-dismiss").popover({ trigger: "focus" })
+  })
 
