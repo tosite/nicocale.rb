@@ -71,7 +71,7 @@ i = 0
     team_user_id: u.id,
     user_id: u.user_id,
     team_id: u.team_id,
-    emotion_id: (i % 3) + 1,
+    emotion_id: ((i + u.id) % 3) + 1,
     reported_on: d,
   }
   UserEmotion.create(user_emotions)
