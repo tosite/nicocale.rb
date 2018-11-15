@@ -1,8 +1,12 @@
 h1 Listing teams
 h2 参加しているチーム
-ul.list-group
+.row
   - @joined_teams.each do |team|
-    = render "teams/team_list", team: team
+    = render "teams/team_card", team: team, user_emotion: @user_emotions_for_today[team.id]
+  / ul.list-group
+    - @joined_teams.each do |team|
+      / = render "teams/team_list", team: team
+      = render "teams/team_card", team: team
 
 h2 参加していないチーム
 ul.list-group
