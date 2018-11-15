@@ -1,15 +1,17 @@
 = form_for [team, user_emotion] do |f|
-  - @emotions.each do |e|
-    .radio
-      label
-        input id="user_emotion_emotion_id_#{e.id}" name="user_emotion[emotion_id]" type="radio" value="#{e.id}"
-          = render "avatar", avatar: e.avatar, alt: e.name, size: "sm"
+  .row
+    - @emotions.each do |e|
+      .col-4
+        .radio.text-center
+          label
+            input id="user_emotion_emotion_id_#{e.id}" name="user_emotion[emotion_id]" type="radio" value="#{e.id}"
+              = render "avatar", avatar: e.avatar, alt: e.name, size: "sm"
 
   .form-group
     = f.label :description, class: "bmd-label-floating"
     = f.text_area :description, class: "form-control"
 
-    = f.text_field :reported_on,  value: "#{date}"
+    = f.hidden_field :reported_on,  value: "#{date}"
 
   .actions
     = f.submit "更新する", class: "btn btn-primary btn-raised btn-block btn-lg"
