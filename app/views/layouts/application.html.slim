@@ -10,8 +10,11 @@ html.is-application lang="ja"
     = csrf_meta_tags
     / = render "favicons"
     sass:
+      body
+        position: relative
       main
         min-height: calc(100vh - 56px)
+        position: relative
       .avatar
         object-fit: cover
         background-color: #ccc
@@ -100,17 +103,26 @@ html.is-application lang="ja"
         margin: 0
       .pointer
         cursor: pointer
-  body style="position: relative;"
+      .emotion-comment
+        position: relative
+      .emotion-comment:before
+        position: absolute
+        content:  "💬"
+        right:    -5px
+        top:      -5px
+
+
+  body
     .bmd-layout-container.bmd-drawer-f-l.bmd-drawer-overlay style="position: relative;"
       = render "navbar/nav"
-      main.bmd-layout-content style="position: relative;"
+      main.bmd-layout-content
         .mb-4
         .container
           = render "message"
           = yield
       - if user_signed_in?
         = render "navbar/sign_in_side", joined_teams: @joined_teams
-        = render "user_modal",          user:  current_user,      me: true
+        = render "user_modal",          user: current_user, me: true
 
         - @joined_teams.each do |team|
           = render "teams/team_modal", team: team, joined: true
