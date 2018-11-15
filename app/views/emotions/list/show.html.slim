@@ -58,7 +58,7 @@ div style="overflow: auto;"
               - e = ue.emotion
               - if !ue.description.nil? && ue.description != ""
                 .emotion-comment
-                button.btn.btn-primary data-toggle="popover" title="comment" data-content="test" data-trigger="focus" tabindex="0"
+                button.btn.btn-primary data-toggle="popover" title="comment" data-content="#{ue.description}" data-trigger="focus" tabindex="0"
                   = render "avatar", avatar: e.avatar, alt: e.name, size: "xs"
               - else
                 button.btn.btn-primary
