@@ -3,7 +3,6 @@
 class UserEmotionsController < ApplicationController
   before_action :set_user_emotion, only: [:update, :destroy]
   before_action :set_team_user# ,    only: [:create]
-  before_action :set_team_user# ,    only: [:create]
 
   # POST /user_emotions
   # POST /user_emotions.json
@@ -56,7 +55,8 @@ class UserEmotionsController < ApplicationController
       else
         format.html { redirect_back_page(alerts: "errors!") }
         format.json { render json: @user_emotion.errors, status: :unprocessable_entity }
-      end    end
+      end
+    end
   end
 
   # DELETE /user_emotions/1

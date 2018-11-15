@@ -3,16 +3,8 @@ h2 参加しているチーム
 .row
   - @joined_teams.each do |team|
     = render "teams/team_card", team: team, user_emotion: @user_emotions_for_today[team.id]
-  / ul.list-group
-    - @joined_teams.each do |team|
-      / = render "teams/team_list", team: team
-      = render "teams/team_card", team: team
 
 h2 参加していないチーム
 ul.list-group
   - @not_joined_teams.each do |team|
     = render "teams/team_list", team: team
-
-/ = link_to 'New Team', new_team_path
-
-/ = link_to 'ログアウト', destroy_user_session_path, method: :delete

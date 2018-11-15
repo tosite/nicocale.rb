@@ -26,15 +26,4 @@ Rails.application.routes.draw do
 
   get "/api/teams/:team_id/emotions/:emotion_id" => "user_emotions#modify"
 
-  # namespace :api do
-  #   resources :teams do
-  #     resources :user_emotions, only: %i(emotion_modify)
-  #   end
-  # end
-
-  # resources :team_users do
-  # resources :teams
-  # end
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
