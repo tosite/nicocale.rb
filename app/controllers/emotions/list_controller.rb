@@ -5,8 +5,6 @@ class Emotions::ListController < ApplicationController
   # before_action :set_month
   # before_action :set_team_users
 
-  include UserEmotionsHelper
-
   # GET /teams/1
   # GET /teams/1.json
   def show
