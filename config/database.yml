@@ -29,7 +29,6 @@ test:
   
 production:
   <<: *default
-  adapter: mysql2
   username: <%= ENV["MC_DB_USERNAME"] %>
   password: <%= ENV["MC_DB_PASSWORD"] %>
   database: <%= ENV["MC_DATABASE"] %>
