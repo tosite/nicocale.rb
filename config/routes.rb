@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     get "/users/sign_out" => "devise/sessions#destroy"
   end
 
+  resources :slack do
+    collection do
+      get :auth
+    end
+  end
+
   namespace :admin do
     resources :emotions, only: %i(index new edit create update)
   end
@@ -25,5 +31,4 @@ Rails.application.routes.draw do
   end
 
   get "/api/teams/:team_id/emotions/:emotion_id" => "user_emotions#modify"
-
 end

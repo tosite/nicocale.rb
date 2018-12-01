@@ -22,6 +22,7 @@ gem "html2slim"
 gem "devise"
 gem "rails-i18n", "~> 5.1"
 gem "dotenv-rails"
+gem "slack-api"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
