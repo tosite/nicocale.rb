@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.5.1"
 
-gem "rails", "~> 5.2.1"
+gem "rails", "~> 5.2.2"
 
 gem "mysql2"
 gem "rubocop"
@@ -22,6 +22,8 @@ gem "html2slim"
 gem "devise"
 gem "rails-i18n", "~> 5.1"
 gem "dotenv-rails"
+gem "omniauth"
+gem "omniauth-slack"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

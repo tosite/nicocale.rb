@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_common_team
   before_action :set_emotions
   before_action :add_permit_params, if: :devise_controller?
