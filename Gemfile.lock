@@ -359,6 +359,7 @@ DEPENDENCIES
   meta_request
   mini_magick (~> 4.8)
   mysql2
+  omniauth
   omniauth-slack
   puma (~> 3.11)
   rack-mini-profiler
