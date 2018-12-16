@@ -4,18 +4,15 @@ Rails.application.routes.draw do
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
-  root to: "teams#index"
+  root to: "devise/sessions#new"
 
   devise_for :users
   devise_scope :user do
     get "/users/sign_out" => "devise/sessions#destroy"
   end
 
-  resources :slack do
-    collection do
-      get :auth
-    end
-  end
+  get "auth/slack/callback" => "slack#callback"
+  get "auth/slack/index"    => "slack#index"
 
   namespace :admin do
     resources :emotions, only: %i(index new edit create update)

@@ -13,21 +13,9 @@ class SlackController < ApplicationController
   def index
   end
 
-  def new
-    path = "https://slack.com/oauth/authorize\?scope\=identity.basic+identity.avatar\&client_id\=#{ENV['SLACK_CLIENT_ID']}"
-    redirect_to path
-  end
-
-  def auth
-    auth_params = {
-      client_id:     ENV["SLACK_CLIENT_ID"],
-      client_secret: ENV["SLACK_CLIENT_SECRET"],
-      code:          params[:code],
-      scope:         "identity.basic+identity.avatar",
-    }
-    result  = Slack.oauth_access(auth_params)
-    token   = result["access_token"]
-    client  = Slack::Client.new token: token
-    @s_user = client.users_profile_get["profile"]
+  def callback
+    # TODO:DB保存処理
+    # TODO:リダイレクト先変更
+    redirect_to "/auth/slack/index"
   end
 end
