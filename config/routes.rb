@@ -25,5 +25,4 @@ Rails.application.routes.draw do
   end
 
   get "/api/teams/:team_id/emotions/:emotion_id" => "user_emotions#modify"
-
 end
